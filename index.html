@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Support - EssentialIndia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- This page is what appears INSIDE the floating window on your website -->
+  <div class="chat">
+    <header class="chat-header">
+      <div>
+        <h1>🌱 EssentialIndia Assistant</h1>
+        <p>{{ company }}</p>
+      </div>
+      <button id="close-btn" class="close-btn" aria-label="Close chat" title="Close">✕</button>
+    </header>
+
+    <div id="chat-box" class="chat-box" aria-live="polite"></div>
+
+    <div id="quick-options" class="quick-options"></div>
+
+    <form id="chat-form" class="chat-input" autocomplete="off">
+      <input type="text" id="message" placeholder="Type your message..." maxlength="1000" aria-label="Your message">
+      <button type="submit" id="send-btn" class="send-btn" aria-label="Send">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/></svg>
+      </button>
+    </form>
+
+    <footer class="chat-footer">
+      <a href="tel:{{ phone|replace(' ', '') }}">📞 {{ phone }}</a>
+      <a href="mailto:{{ email }}">✉️ {{ email }}</a>
+    </footer>
+  </div>
+
+  <script>
+    window.CHAT_CONFIG = {
+      welcome: {{ welcome|tojson }},
+      quickReplies: {{ quick_replies|tojson }}
+    };
+  </script>
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
